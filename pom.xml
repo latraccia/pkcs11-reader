@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>it.latraccia</groupId>
+    <artifactId>pkcs11-reader</artifactId>
+    <version>0.1-SNAPSHOT</version>
+    <name>PKCS#11 Card Reader</name>
+    <description>A Command Line Interface for reading and encrypting PKCS#11 card data.</description>
+
+    <packaging>jar</packaging>
+
+    <developers>
+        <developer>
+            <id>frapontillo</id>
+            <name>Francesco</name>
+            <email>francescopontillo@gmail.com</email>
+            <organization>La Traccia</organization>
+            <organizationUrl>http://www.latraccia.it/en/</organizationUrl>
+            <roles>
+                <role>manager</role>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>joinup</id>
+            <url>https://joinup.ec.europa.eu/nexus/content/repositories/releases/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>eu.europa.ec.joinup.sd-dss</groupId>
+            <artifactId>dss-spi</artifactId>
+            <version>3.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.beust</groupId>
+            <artifactId>jcommander</artifactId>
+            <version>1.32</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.3</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Test configuration, run only unit tests -->
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12.4</version>
+                <configuration>
+                    <groups>it.latraccia.pkcs11.reader.test.util.AESTest</groups>
+                </configuration>
+            </plugin>
+            <!-- Assembly configuration, package everything in a single jar -->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>pkcs11-reader</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                            <archive>
+                                <manifest>
+                                    <mainClass>it.latraccia.pkcs11.reader.cli.ReadCLI</mainClass>
+                                </manifest>
+                            </archive>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
