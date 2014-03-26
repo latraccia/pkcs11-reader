@@ -7,7 +7,7 @@
 
     <groupId>it.latraccia</groupId>
     <artifactId>pkcs11-reader</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.2-SNAPSHOT</version>
     <name>PKCS#11 Card Reader</name>
     <description>A Command Line Interface for reading and encrypting PKCS#11 card data.</description>
 
