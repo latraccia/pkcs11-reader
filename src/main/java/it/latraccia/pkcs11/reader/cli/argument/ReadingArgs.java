@@ -51,6 +51,10 @@ public class ReadingArgs {
             description = "Password for the data encryption.")
     private String encryptionPassword;
 
+    @Parameter(names = {"-log", "--log"},
+               description = "Path for the output log file")
+    private String log;
+
     public File getDriver() {
         return driver;
     }
@@ -73,5 +77,13 @@ public class ReadingArgs {
 
     public void setEncryptionPassword(String encryptionPassword) {
         this.encryptionPassword = encryptionPassword;
+    }
+
+    public String getLog() {
+        return log;
+    }
+
+    public void setLog(String log) {
+        this.log = log;
     }
 }

@@ -29,6 +29,7 @@ The following list contains all of the accepted parameters.
 path for the SSCD (e.g. smart card), must be a valid path
 * `--password` or `-p`, the PIN of the card to read information from
 * `--encryption` or `-e`, a 16-characters password to encrypt the found information with (see [Encryption](#encryption)).
+* `--log` or `-log`, if present, output will be redirected to the specified file.
 
 ### Encryption
 
@@ -43,9 +44,10 @@ The read information will be encrypted, if the `--encryption` parameter is speci
 
 ```shell
     $ java -jar pkcs11-reader-0.1-SNAPSHOT-jar-with-dependencies.jar ReadCLI
-		--driver="drivers/bit4ipki.dll"
+		--driver="~/drivers/bit4ipki.dll"
 		--password="mypin"
 		--encryption="0123456789abcdef"
+		--log="~/readcli.log"
 ```
 
 ## License

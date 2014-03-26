@@ -29,6 +29,7 @@ import it.latraccia.pkcs11.reader.util.DSSPrivateKeyUtil;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import java.io.PrintStream;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.KeyStoreException;
@@ -44,10 +45,18 @@ public class ReadCLI {
 
     public static void main(String[] args) {
         ReadingArgs readingArgs = new ReadingArgs();
-        String returnThis = null;
+        String returnThis;
+
+        PrintStream ps = null;
 
         try {
             new JCommander(readingArgs, args);
+
+            if (readingArgs.getLog() != null) {
+                ps = new PrintStream(readingArgs.getLog());
+                System.setOut(ps);
+                System.setErr(ps);
+            }
 
             // Get the keys
             List<DSSPrivateKeyEntry> keys = getKeys(readingArgs);
@@ -61,6 +70,10 @@ public class ReadCLI {
 
         // Print the resulting string
         System.out.println(returnThis);
+
+        if (ps != null) {
+            ps.close();
+        }
     }
 
     /**
@@ -72,8 +85,7 @@ public class ReadCLI {
     private static List<DSSPrivateKeyEntry> getKeys(ReadingArgs readingArgs) throws KeyStoreException {
         Pkcs11SignatureToken token = new Pkcs11SignatureToken(
                 readingArgs.getDriver().getAbsolutePath(), readingArgs.getPassword().toCharArray());
-        List<DSSPrivateKeyEntry> keys = token.getKeys();
-        return keys;
+        return token.getKeys();
     }
 
     /**
