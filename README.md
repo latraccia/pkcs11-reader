@@ -16,10 +16,13 @@ This will proceed on the main `pom.xml` to clean and build the project.
 To read information from a card, connect the card reader, insert the card, then call the `ReadCLI` class on the built `jar` with the proper parameters:
 
 ```shell
-	$ java -jar pkcs11-reader-0.1-SNAPSHOT-jar-with-dependencies.jar ReadCLI
+	$ java -jar pkcs11-reader-0.2-SNAPSHOT-jar-with-dependencies.jar ReadCLI
 ```
 
 The card information will be printed on the standard output, so you can redirect it to any supported output stream.
+
+**IMPORTANT**: if you use a 32-bit smartcard library, please make sure you execute the JAR file with
+the 32-bit `java` executable.
 
 ### Parameters
 
